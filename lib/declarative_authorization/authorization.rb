@@ -32,7 +32,18 @@ module Authorization
   def self.current_user=(user)
     Thread.current["current_user"] = user
   end
+  # Controller-independent method for retrieving the current session.
+  # Needed for model security where the current session is not available.
+  def self.session
+    Thread.current["session"] || nil
+  end
   
+  # Controller-independent method for setting the current session.
+  def self.session=(session)
+    Thread.curren8t["session"] = session
+  end
+  
+
   # For use in test cases only
   def self.ignore_access_control (state = nil) # :nodoc:
     Thread.current["ignore_access_control"] = state unless state.nil?
